@@ -1,29 +1,19 @@
 package pe.edu.upc.aaw.helpdesk_rag_backend.serviceinterfices;
 
-import pe.edu.upc.aaw.helpdesk_rag_backend.dtos.UserDTO;
 import pe.edu.upc.aaw.helpdesk_rag_backend.entities.Users;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface UserService {
+    public void insert(Users users);
 
-    void insert(Users users);
+    public List<Users> list();
 
-    List<UserDTO> list();   // ← antes devolvía Users
+    public void delete(Long idusers);
 
-    void delete(Long idusers);
+    public Users listarId(Long idusers);
 
-    UserDTO listarId(Long idusers); // ← antes devolvía Users
+    public void insertarRol(String rol, Long userId);
 
-    void insertarRol(String role, Long userId);
-
-    void update(Users entity);
-
-    void actualizarRol(String role, Long id);
-
-    @Transactional
-    void updateUserFields(UserDTO dto);
-
-    void updateBasic(Users u);
+    void updateUser(Users u);
 }

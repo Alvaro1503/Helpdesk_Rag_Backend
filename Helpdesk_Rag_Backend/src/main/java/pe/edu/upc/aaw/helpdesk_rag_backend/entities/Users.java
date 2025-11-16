@@ -15,6 +15,8 @@ public class Users implements Serializable {
 	private Long id;
 	@Column(name = "name",length = 200)
 	private String name;
+	@Column(name = "last_name",length = 200)
+	private String last_name;
 	@Column(length = 30, unique = true)
 	private String mail;
 	@Column(length = 200)
@@ -22,14 +24,11 @@ public class Users implements Serializable {
 	private String password;
 	@JsonIgnore
 	private Boolean enabled;
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id")
-	@JsonIgnore
-	private List<Role> roles;
+	@Column(length = 50)
+	private String role;
 	@OneToMany(mappedBy = "user_id")
 	@JsonIgnore
 	private List<Feedback> feedbacks;
-
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +43,14 @@ public class Users implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getMail() {
@@ -70,12 +77,11 @@ public class Users implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
-
 }
