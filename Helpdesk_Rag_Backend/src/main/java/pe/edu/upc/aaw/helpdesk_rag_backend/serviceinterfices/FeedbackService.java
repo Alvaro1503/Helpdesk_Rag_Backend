@@ -4,9 +4,12 @@ import pe.edu.upc.aaw.helpdesk_rag_backend.entities.Feedback;
 
 import java.util.List;
 
+import pe.edu.upc.aaw.helpdesk_rag_backend.dtos.FeedbackStatsDTO;
+
 public interface FeedbackService {
-    public void insert(Feedback feedback);
+    void insert(Feedback feedback);
     public void delete(int idFeedback);
-    public List<Feedback> list();
-    public Feedback listarId(int idFeedback);
+    List<Feedback> list();
+    Feedback listarId(int idFeedback);
+    FeedbackStatsDTO getMonthlyStats(int year, int month);
 }

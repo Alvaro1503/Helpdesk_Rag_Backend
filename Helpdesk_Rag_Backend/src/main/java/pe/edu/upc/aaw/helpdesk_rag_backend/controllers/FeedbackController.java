@@ -1,5 +1,6 @@
 package pe.edu.upc.aaw.helpdesk_rag_backend.controllers;
 
+import pe.edu.upc.aaw.helpdesk_rag_backend.dtos.FeedbackStatsDTO;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import pe.edu.upc.aaw.helpdesk_rag_backend.dtos.FeedbackDTO;
 import pe.edu.upc.aaw.helpdesk_rag_backend.entities.Feedback;
 import pe.edu.upc.aaw.helpdesk_rag_backend.serviceinterfices.FeedbackService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +22,9 @@ public class FeedbackController {
     public void registrar(@RequestBody FeedbackDTO dto) {
         ModelMapper m = new ModelMapper();
         Feedback f = m.map(dto, Feedback.class);
+        f.setCreated_at(new Date());
+
+
         fS.insert(f);
     }
     @GetMapping
@@ -41,6 +46,11 @@ public class FeedbackController {
         ModelMapper m = new ModelMapper();
         Feedback f = m.map(dto, Feedback.class);
         fS.insert(f);
+    }
+    @GetMapping("/stats")
+    public FeedbackStatsDTO getStats(@RequestParam int year,
+                                     @RequestParam int month) {
+        return fS.getMonthlyStats(year, month);
     }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id) {
