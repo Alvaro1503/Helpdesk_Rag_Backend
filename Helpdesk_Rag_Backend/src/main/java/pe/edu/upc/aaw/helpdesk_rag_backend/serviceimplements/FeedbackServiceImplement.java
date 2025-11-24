@@ -54,13 +54,15 @@ public class FeedbackServiceImplement implements FeedbackService {
         dto.setTotal(total);
 
         long promoters = feedbacks.stream()
-                .filter(f -> f.getRating() >= 4)
+                .filter(f -> f.getRating() == 5)
                 .count();
+
         long passives = feedbacks.stream()
-                .filter(f -> f.getRating() == 3)
+                .filter(f -> f.getRating() == 4)
                 .count();
+
         long detractors = feedbacks.stream()
-                .filter(f -> f.getRating() <= 2)
+                .filter(f -> f.getRating() <= 3)
                 .count();
 
         dto.setPromoters(promoters);
